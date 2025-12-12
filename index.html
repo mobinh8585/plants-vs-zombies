@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plants vs Zombies</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- SVG Definitions -->
+    <svg style="display: none;">
+        <defs>
+            <!-- Peashooter SVG - Facing Right -->
+            <symbol id="svg-peashooter" viewBox="0 0 64 64">
+                <g transform="translate(64, 0) scale(-1, 1)">
+                    <!-- Leaves -->
+                    <path d="M22 48 Q10 40 18 56 Q28 60 32 48" fill="#4CAF50" stroke="#2E7D32" stroke-width="1" />
+                    <path d="M42 48 Q54 40 46 56 Q36 60 32 48" fill="#4CAF50" stroke="#2E7D32" stroke-width="1" />
+                    <path d="M26 52 Q22 58 28 62" fill="#388E3C" />
+                    <path d="M38 52 Q42 58 36 62" fill="#388E3C" />
+
+                    <!-- Stem -->
+                    <path d="M30 48 Q28 40 32 30 Q36 40 34 48" fill="#8BC34A" stroke="#558B2F" stroke-width="1" />
+
+                    <!-- Head shadow -->
+                    <ellipse cx="34" cy="22" rx="14" ry="14" fill="#33691E" opacity="0.3"
+                        transform="rotate(-15 34 22)" />
+
+                    <!-- Head Main -->
+                    <path d="M20 18 Q16 12 24 8 Q34 4 44 12 Q52 20 46 32 Q40 42 28 38 Q20 34 20 18" fill="#7CB342"
+                        stroke="#33691E" stroke-width="1.5" />
+
+                    <!-- Snout/Mouth -->
+                    <circle cx="18" cy="18" r="8" fill="#558B2F" />
+                    <circle cx="18" cy="18" r="5" fill="#1B5E20" />
+
+                    <!-- Leaf on head -->
+                    <path d="M44 14 Q52 10 50 18 Q46 16 44 14" fill="#4CAF50" stroke="#2E7D32" stroke-width="1" />
+
+                    <!-- Eyes -->
+                    <ellipse cx="30" cy="16" rx="3.5" ry="4.5" fill="black" />
+                    <circle cx="31" cy="15" r="1.5" fill="white" />
+                    <ellipse cx="40" cy="18" rx="3.5" ry="4.5" fill="black" />
+                    <circle cx="41" cy="17" r="1.5" fill="white" />
+
+                    <!-- Highlight -->
+                    <ellipse cx="36" cy="10" rx="4" ry="2" fill="white" opacity="0.4" transform="rotate(-10)" />
+                </g>
+            </symbol>
+
+            <!-- Sunflower SVG -->
+            <symbol id="svg-sunflower" viewBox="0 0 64 64">
+                <!-- Leaves -->
+                <path d="M24 54 Q10 48 20 62 Q30 64 32 54" fill="#4CAF50" stroke="#2E7D32" stroke-width="1" />
+                <path d="M40 54 Q54 48 44 62 Q34 64 32 54" fill="#4CAF50" stroke="#2E7D32" stroke-width="1" />
+
+                <!-- Stem -->
+                <path d="M32 54 L32 38" stroke="#558B2F" stroke-width="3" />
+
+                <!-- Petals Background -->
+                <g fill="#FFC107" stroke="#FF8F00" stroke-width="0.5">
+                    <path
+                        d="M32 8 L36 20 L44 12 L42 24 L54 22 L48 32 L60 38 L48 44 L54 54 L42 50 L36 60 L32 48 L28 60 L22 50 L10 54 L16 44 L4 38 L16 32 L10 22 L22 24 L20 12 L28 20 Z" />
+                </g>
+
+                <!-- Face -->
+                <circle cx="32" cy="32" r="14" fill="#795548" stroke="#5D4037" stroke-width="1" />
+                <circle cx="32" cy="32" r="12" fill="#8D6E63" />
+
+                <!-- Eyes -->
+                <ellipse cx="28" cy="28" rx="2.5" ry="3.5" fill="black" />
+                <circle cx="29" cy="27" r="1" fill="white" />
+                <ellipse cx="36" cy="28" rx="2.5" ry="3.5" fill="black" />
+                <circle cx="37" cy="27" r="1" fill="white" />
+
+                <!-- Smile -->
+                <path d="M26 36 Q32 40 38 36" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" />
+
+                <!-- Cheeks -->
+                <circle cx="24" cy="34" r="1.5" fill="#FF8A65" opacity="0.6" />
+                <circle cx="40" cy="34" r="1.5" fill="#FF8A65" opacity="0.6" />
+            </symbol>
+
+            <!-- Wall-nut SVG -->
+            <symbol id="svg-wallnut" viewBox="0 0 64 64">
+                <!-- Body Main -->
+                <path d="M32 6 C 18 6, 12 16, 12 32 C 12 52, 20 58, 32 58 C 44 58, 52 52, 52 32 C 52 16, 46 6, 32 6 Z"
+                    fill="#D7CCC8" stroke="#5D4037" stroke-width="2" />
+                <path d="M32 6 C 18 6, 14 16, 14 32 C 14 50, 22 56, 32 56 C 42 56, 50 50, 50 32 C 50 16, 46 6, 32 6 Z"
+                    fill="#A1887F" />
+
+                <!-- Texture details -->
+                <path d="M18 16 Q24 20 18 24" fill="none" stroke="#6D4C41" stroke-width="1" opacity="0.5" />
+                <path d="M46 16 Q40 20 46 24" fill="none" stroke="#6D4C41" stroke-width="1" opacity="0.5" />
+                <path d="M20 44 Q26 40 20 36" fill="none" stroke="#6D4C41" stroke-width="1" opacity="0.5" />
+
+                <!-- Eyes -->
+                <g>
+                    <!-- Left Eye -->
+                    <circle cx="25" cy="26" r="5" fill="white" stroke="#3E2723" stroke-width="1" />
+                    <circle cx="26" cy="26" r="2" fill="black" />
+                    <!-- Right Eye -->
+                    <circle cx="39" cy="26" r="5" fill="white" stroke="#3E2723" stroke-width="1" />
+                    <circle cx="38" cy="26" r="2" fill="black" />
+                </g>
+
+                <!-- Worried Mouth -->
+                <path d="M28 36 Q32 34 36 36" fill="none" stroke="#3E2723" stroke-width="1.5" stroke-linecap="round" />
+
+                <!-- Shadow -->
+                <ellipse cx="32" cy="56" rx="16" ry="3" fill="black" opacity="0.2" />
+            </symbol>
+
+            <!-- Snow Pea SVG - Facing Right -->
+            <symbol id="svg-snowpea" viewBox="0 0 64 64">
+                <g transform="translate(64, 0) scale(-1, 1)">
+                    <!-- Leaves -->
+                    <path d="M22 48 Q10 40 18 56 Q28 60 32 48" fill="#81D4FA" stroke="#0288D1" stroke-width="1" />
+                    <path d="M42 48 Q54 40 46 56 Q36 60 32 48" fill="#81D4FA" stroke="#0288D1" stroke-width="1" />
+                    <path d="M26 52 Q22 58 28 62" fill="#4FC3F7" />
+                    <path d="M38 52 Q42 58 36 62" fill="#4FC3F7" />
+
+                    <!-- Stem -->
+                    <path d="M30 48 Q28 40 32 30 Q36 40 34 48" fill="#4FC3F7" stroke="#0277BD" stroke-width="1" />
+
+                    <!-- Head shadow -->
+                    <ellipse cx="34" cy="22" rx="14" ry="14" fill="#01579B" opacity="0.2"
+                        transform="rotate(-15 34 22)" />
+
+                    <!-- Head Main -->
+                    <path d="M20 18 Q16 12 24 8 Q34 4 44 12 Q52 20 46 32 Q40 42 28 38 Q20 34 20 18" fill="#29B6F6"
+                        stroke="#01579B" stroke-width="1.5" />
+
+                    <!-- Snout/Mouth -->
+                    <circle cx="18" cy="18" r="8" fill="#03A9F4" />
+                    <circle cx="18" cy="18" r="5" fill="#01579B" />
+
+                    <!-- Crystals -->
+                    <path d="M44 14 L46 8 L48 14 L52 16 L48 18 L46 24 L44 18 L40 16 Z" fill="#E1F5FE" opacity="0.8" />
+
+                    <!-- Eyes -->
+                    <ellipse cx="30" cy="16" rx="3.5" ry="4.5" fill="black" />
+                    <circle cx="31" cy="15" r="1.5" fill="white" />
+                    <ellipse cx="40" cy="18" rx="3.5" ry="4.5" fill="black" />
+                    <circle cx="41" cy="17" r="1.5" fill="white" />
+
+                    <!-- Frost effect -->
+                    <path d="M24 24 Q28 28 32 24" stroke="white" stroke-width="1" fill="none" opacity="0.6" />
+                </g>
+            </symbol>
+
+            <!-- Cherry Bomb SVG -->
+            <symbol id="svg-cherrybomb" viewBox="0 0 64 64">
+                <!-- Stems -->
+                <path d="M32 10 Q22 15 22 24" fill="none" stroke="#2E7D32" stroke-width="3" stroke-linecap="round" />
+                <path d="M32 10 Q42 15 42 24" fill="none" stroke="#2E7D32" stroke-width="3" stroke-linecap="round" />
+
+                <!-- Leaf -->
+                <path d="M32 10 Q38 4 44 8 Q46 12 36 12 Z" fill="#4CAF50" stroke="#1B5E20" stroke-width="1" />
+
+                <!-- Left Cherry -->
+                <circle cx="22" cy="36" r="14" fill="#D32F2F" stroke="#8B0000" stroke-width="1" />
+                <path d="M16 30 Q22 28 28 30" fill="none" stroke="black" stroke-width="2" />
+                <circle cx="18" cy="34" r="2" fill="black" />
+                <circle cx="26" cy="34" r="2" fill="black" />
+                <ellipse cx="18" cy="30" rx="4" ry="5" fill="white" opacity="0.2" transform="rotate(-15)" />
+                <!-- Angry eyebrows -->
+                <path d="M16 30 L20 33" stroke="black" stroke-width="1.5" />
+                <path d="M28 30 L24 33" stroke="black" stroke-width="1.5" />
+
+                <!-- Right Cherry -->
+                <circle cx="42" cy="36" r="14" fill="#C62828" stroke="#8B0000" stroke-width="1" />
+                <circle cx="38" cy="34" r="2" fill="black" />
+                <circle cx="46" cy="34" r="2" fill="black" />
+                <ellipse cx="38" cy="30" rx="4" ry="5" fill="white" opacity="0.2" transform="rotate(-15)" />
+                <!-- Angry eyebrows -->
+                <path d="M36 30 L40 33" stroke="black" stroke-width="1.5" />
+                <path d="M48 30 L44 33" stroke="black" stroke-width="1.5" />
+
+                <!-- Sparks -->
+                <path d="M32 6 L30 2 L34 2 Z" fill="#FFEB3B">
+                    <animate attributeName="opacity" values="1;0;1" dur="0.2s" repeatCount="indefinite" />
+                </path>
+                <circle cx="32" cy="10" r="2" fill="#FF5722" />
+            </symbol>
+
+            <!-- Chomper SVG -->
+            <symbol id="svg-chomper" viewBox="0 0 64 64">
+                <!-- Stem/Leaves as base -->
+                <path d="M28 56 Q16 52 24 62" fill="#4CAF50" stroke="#1B5E20" stroke-width="1" />
+                <path d="M36 56 Q48 52 40 62" fill="#4CAF50" stroke="#1B5E20" stroke-width="1" />
+                <path d="M32 56 L32 40" stroke="#2E7D32" stroke-width="3" />
+
+                <!-- Head Bottom Jaw -->
+                <path d="M12 28 Q12 48 32 48 Q52 48 52 28" fill="#7B1FA2" stroke="#4A148C" stroke-width="1.5" />
+
+                <!-- Head Top Jaw -->
+                <path d="M12 28 Q12 8 32 8 Q52 8 52 28" fill="#9C27B0" stroke="#4A148C" stroke-width="1.5" />
+
+                <!-- Mouth Interior -->
+                <path d="M16 28 L48 28" stroke="#6A1B9A" stroke-width="2" />
+
+                <!-- Teeth Top -->
+                <path d="M18 28 L20 20 L22 28 M26 28 L28 20 L30 28 M34 28 L36 20 L38 28 M42 28 L44 20 L46 28"
+                    fill="white" stroke="#E0E0E0" stroke-width="0.5" />
+
+                <!-- Teeth Bottom -->
+                <path d="M18 28 L20 36 L22 28 M26 28 L28 36 L30 28 M34 28 L36 36 L38 28 M42 28 L44 36 L46 28"
+                    fill="white" stroke="#E0E0E0" stroke-width="0.5" />
+
+                <!-- Lips -->
+                <path d="M12 28 C 12 30, 8 26, 12 24" fill="#AB47BC" />
+                <path d="M52 28 C 52 30, 56 26, 52 24" fill="#AB47BC" />
+
+                <!-- Spots -->
+                <circle cx="20" cy="16" r="3" fill="#BA68C8" opacity="0.6" />
+                <circle cx="36" cy="14" r="2" fill="#BA68C8" opacity="0.6" />
+                <circle cx="44" cy="20" r="2.5" fill="#BA68C8" opacity="0.6" />
+            </symbol>
+
+            <!-- Repeater SVG - Facing Right -->
+            <symbol id="svg-repeater" viewBox="0 0 64 64">
+                <g transform="translate(64, 0) scale(-1, 1)">
+                    <!-- Leaves -->
+                    <path d="M22 48 Q10 40 18 56 Q28 60 32 48" fill="#4CAF50" stroke="#2E7D32" stroke-width="1" />
+                    <path d="M42 48 Q54 40 46 56 Q36 60 32 48" fill="#4CAF50" stroke="#2E7D32" stroke-width="1" />
+                    <path d="M26 52 Q22 58 28 62" fill="#388E3C" />
+                    <path d="M38 52 Q42 58 36 62" fill="#388E3C" />
+
+                    <!-- Stem -->
+                    <path d="M30 48 Q28 40 32 30 Q36 40 34 48" fill="#8BC34A" stroke="#558B2F" stroke-width="1" />
+
+                    <!-- Head shadow -->
+                    <ellipse cx="34" cy="22" rx="14" ry="14" fill="#33691E" opacity="0.3"
+                        transform="rotate(-15 34 22)" />
+
+                    <!-- Head Main -->
+                    <path d="M20 18 Q16 12 24 8 Q34 4 44 12 Q52 20 46 32 Q40 42 28 38 Q20 34 20 18" fill="#7CB342"
+                        stroke="#33691E" stroke-width="1.5" />
+
+                    <!-- Snout/Mouth -->
+                    <circle cx="18" cy="18" r="8" fill="#558B2F" />
+                    <circle cx="18" cy="18" r="5" fill="#1B5E20" />
+
+                    <!-- Leaf on head (Back) -->
+                    <path d="M44 14 Q52 10 50 18 Q46 16 44 14" fill="#4CAF50" stroke="#2E7D32" stroke-width="1" />
+                    <path d="M48 12 Q56 8 54 16" fill="#4CAF50" stroke="#2E7D32" stroke-width="1" />
+
+                    <!-- Angry Eyes -->
+                    <path d="M26 14 L34 16" stroke="black" stroke-width="1.5" /> <!-- Eyebrow L -->
+                    <path d="M44 16 L36 14" stroke="black" stroke-width="1.5" /> <!-- Eyebrow R -->
+
+                    <ellipse cx="30" cy="18" rx="3.5" ry="4.5" fill="black" />
+                    <circle cx="31" cy="17" r="1.5" fill="white" />
+                    <ellipse cx="40" cy="18" rx="3.5" ry="4.5" fill="black" />
+                    <circle cx="41" cy="17" r="1.5" fill="white" />
+
+                    <!-- Highlight -->
+                    <ellipse cx="36" cy="10" rx="4" ry="2" fill="white" opacity="0.4" transform="rotate(-10)" />
+                </g>
+            </symbol>
+
+            <!-- Potato Mine SVG -->
+            <symbol id="svg-potatomine" viewBox="0 0 64 64">
+                <!-- Body -->
+                <path d="M16 36 C 16 20, 48 20, 48 36 C 48 56, 16 56, 16 36 Z" fill="#8D6E63" stroke="#5D4037"
+                    stroke-width="2" />
+
+                <!-- Lumps -->
+                <circle cx="20" cy="30" r="4" fill="#795548" />
+                <circle cx="44" cy="34" r="5" fill="#795548" />
+                <circle cx="32" cy="48" r="3" fill="#6D4C41" />
+
+                <!-- Antenna Base -->
+                <rect x="30" y="20" width="4" height="6" fill="#5D4037" />
+
+                <!-- Antenna Bulb -->
+                <circle cx="32" cy="18" r="5" fill="#E53935">
+                    <animate attributeName="fill" values="#E53935;#FFCDD2;#E53935" dur="1s" repeatCount="indefinite" />
+                </circle>
+
+                <!-- Eyes -->
+                <circle cx="26" cy="34" r="2" fill="black" />
+                <circle cx="38" cy="34" r="2" fill="black" />
+
+                <!-- Mouth -->
+                <path d="M28 40 Q32 42 36 40" fill="none" stroke="black" stroke-width="1" />
+            </symbol>
+
+            <!-- Basic Zombie SVG (Premium Enhanced) -->
+            <symbol id="svg-zombie" viewBox="0 0 64 64">
+                <!-- Shadow beneath zombie -->
+                <ellipse cx="32" cy="62" rx="12" ry="3" fill="rgba(0,0,0,0.3)" />
+
+                <!-- Back Leg with torn pants -->
+                <path d="M38 48 L38 60" stroke="#263238" stroke-width="5" stroke-linecap="round" />
+                <path d="M38 52 L40 54 L38 56" stroke="#1a1a1a" stroke-width="1" fill="none" opacity="0.6" />
+                <!-- Tear -->
+                <path d="M38 60 L42 62" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" /> <!-- Shoe -->
+
+                <!-- Back Arm with exposed bone hint -->
+                <path d="M42 30 L52 28" stroke="#4E342E" stroke-width="4" stroke-linecap="round" />
+                <path d="M48 28 L51 27" stroke="#E8E0D5" stroke-width="1.5" opacity="0.7" /> <!-- Bone showing -->
+                <circle cx="53" cy="27" r="3" fill="#558B2F" />
+                <!-- Back hand fingers -->
+                <path d="M53 24 L55 22 M54 27 L57 26 M53 30 L55 32" stroke="#558B2F" stroke-width="1.5"
+                    stroke-linecap="round" />
+
+                <!-- Front Leg with torn pants -->
+                <path d="M26 48 L26 60" stroke="#37474F" stroke-width="5" stroke-linecap="round" />
+                <path d="M26 50 L24 52 L26 54 L24 56" stroke="#263238" stroke-width="1" fill="none" opacity="0.5" />
+                <!-- Torn seam -->
+                <path d="M26 60 L22 62" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" /> <!-- Shoe -->
+
+                <!-- Body/Coat with tears and details -->
+                <path d="M20 28 L18 48 L46 48 L44 28 Z" fill="#5D4037" />
+                <!-- Coat texture/wrinkles -->
+                <path d="M22 32 Q24 35 22 38" stroke="#4E342E" stroke-width="1" fill="none" opacity="0.5" />
+                <path d="M42 34 Q40 37 42 40" stroke="#4E342E" stroke-width="1" fill="none" opacity="0.5" />
+                <!-- Center seam -->
+                <path d="M32 28 L32 48" stroke="#3E2723" stroke-width="1.5" />
+                <!-- Torn bottom edge -->
+                <path d="M18 48 L20 45 L24 48 L28 45 L32 48 L36 45 L40 48 L44 45 L46 48" fill="#5D4037" stroke="none" />
+                <!-- Dirt stains -->
+                <circle cx="25" cy="40" r="2" fill="#3E2723" opacity="0.4" />
+                <circle cx="38" cy="44" r="1.5" fill="#3E2723" opacity="0.3" />
+
+                <!-- Collar & Tie -->
+                <path d="M26 28 L32 30 L38 28" fill="#E8E8E8" stroke="#BDBDBD" stroke-width="0.5" />
+                <path d="M32 29 L34 33 L32 38 L30 33 Z" fill="#C62828" />
+                <path d="M31 32 L33 32" stroke="#B71C1C" stroke-width="0.5" /> <!-- Tie detail -->
+
+                <!-- Head with rotting skin texture -->
+                <ellipse cx="32" cy="18" rx="11" ry="13" fill="#7CB342" />
+                <!-- Skin texture/rot patches -->
+                <ellipse cx="26" cy="22" rx="3" ry="2" fill="#689F38" opacity="0.6" />
+                <ellipse cx="38" cy="12" rx="2" ry="1.5" fill="#558B2F" opacity="0.5" />
+                <path d="M40 20 Q42 22 40 24" stroke="#558B2F" stroke-width="1" fill="none" opacity="0.6" />
+                <!-- Chin definition -->
+                <path d="M26 28 Q32 31 38 28" fill="#6FAF30" />
+
+                <!-- Front Arm with sleeve and hand -->
+                <path d="M22 30 L14 34 L8 36" stroke="#5D4037" stroke-width="5" stroke-linecap="round" fill="none" />
+                <path d="M9 36 L10 40" stroke="#4E342E" stroke-width="3" stroke-linecap="round" /> <!-- Cuff -->
+                <!-- Hand with fingers -->
+                <circle cx="8" cy="36" r="3.5" fill="#7CB342" />
+                <path d="M5 34 L3 32 M5 36 L2 36 M5 38 L3 40 M8 39 L8 42" stroke="#7CB342" stroke-width="2"
+                    stroke-linecap="round" />
+
+                <!-- Face Details -->
+                <!-- Bloodshot Eyes -->
+                <circle cx="27" cy="15" r="4" fill="white" stroke="#33691E" stroke-width="0.5" />
+                <path d="M24 14 L27 15 M24 16 L26 15" stroke="#E57373" stroke-width="0.3" opacity="0.7" />
+                <!-- Bloodshot veins -->
+                <circle cx="27" cy="15" r="1.5" fill="#1a1a1a" />
+                <circle cx="26" cy="14" r="0.5" fill="white" /> <!-- Eye highlight -->
+
+                <circle cx="37" cy="16" r="5" fill="white" stroke="#33691E" stroke-width="0.5" />
+                <path d="M34 15 L37 16 M34 17 L36 16 M40 15 L37 16" stroke="#E57373" stroke-width="0.3" opacity="0.7" />
+                <!-- Bloodshot veins -->
+                <circle cx="37" cy="16" r="2" fill="#1a1a1a" />
+                <circle cx="36" cy="15" r="0.7" fill="white" /> <!-- Eye highlight -->
+
+                <!-- Dark circles under eyes -->
+                <path d="M23 18 Q27 20 31 18" fill="none" stroke="#33691E" stroke-width="1" opacity="0.4" />
+                <path d="M33 20 Q37 22 42 20" fill="none" stroke="#33691E" stroke-width="1" opacity="0.4" />
+
+                <!-- Nose -->
+                <path d="M32 19 L29 22 L32 22" fill="#558B2F" />
+
+                <!-- Mouth with drool -->
+                <path d="M27 24 Q32 23 37 24 Q37 28 32 28 Q27 28 27 24" fill="#3E2723" />
+                <!-- Teeth -->
+                <rect x="29" y="24" width="2" height="2" fill="#FFF9C4" rx="0.5" />
+                <rect x="33" y="24" width="2" height="2" fill="#FFF9C4" rx="0.5" />
+                <rect x="31" y="26" width="1.5" height="2" fill="#FFF9C4" rx="0.5" />
+                <!-- Missing tooth gap -->
+                <rect x="35" y="25" width="1" height="1.5" fill="#2D2015" />
+
+                <!-- Animated Drool -->
+                <path d="M34 28 Q35 32 34 36" stroke="#9CCC65" stroke-width="1.5" fill="none" opacity="0.8"
+                    stroke-linecap="round">
+                    <animate attributeName="d" values="M34 28 Q35 32 34 36;M34 28 Q36 34 35 40;M34 28 Q35 32 34 36"
+                        dur="2s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.8;0.4;0.8" dur="2s" repeatCount="indefinite" />
+                </path>
+
+                <!-- Hair strands -->
+                <path d="M25 7 L26 3 L27 7" fill="none" stroke="#212121" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M30 6 L31 2 L32 6" fill="none" stroke="#212121" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M35 6 L36 3 L37 7" fill="none" stroke="#212121" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M38 8 L40 5 L39 9" fill="none" stroke="#1a1a1a" stroke-width="1" stroke-linecap="round" />
+            </symbol>
+
+            <!-- Conehead Zombie SVG (Premium Enhanced) -->
+            <symbol id="svg-conehead" viewBox="0 0 64 64">
+                <!-- Shadow beneath zombie -->
+                <ellipse cx="32" cy="62" rx="12" ry="3" fill="rgba(0,0,0,0.3)" />
+
+                <!-- Back Leg with torn pants -->
+                <path d="M38 48 L38 60" stroke="#263238" stroke-width="5" stroke-linecap="round" />
+                <path d="M38 60 L42 62" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" />
+
+                <!-- Back Arm -->
+                <path d="M42 30 L52 28" stroke="#4E342E" stroke-width="4" stroke-linecap="round" />
+                <circle cx="53" cy="27" r="3" fill="#558B2F" />
+                <path d="M53 24 L55 22 M54 27 L57 26 M53 30 L55 32" stroke="#558B2F" stroke-width="1.5"
+                    stroke-linecap="round" />
+
+                <!-- Front Leg with torn pants -->
+                <path d="M26 48 L26 60" stroke="#37474F" stroke-width="5" stroke-linecap="round" />
+                <path d="M26 60 L22 62" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" />
+
+                <!-- Body/Coat with details -->
+                <path d="M20 28 L18 48 L46 48 L44 28 Z" fill="#5D4037" />
+                <path d="M22 32 Q24 35 22 38" stroke="#4E342E" stroke-width="1" fill="none" opacity="0.5" />
+                <path d="M32 28 L32 48" stroke="#3E2723" stroke-width="1.5" />
+                <path d="M18 48 L20 45 L24 48 L28 45 L32 48 L36 45 L40 48 L44 45 L46 48" fill="#5D4037" stroke="none" />
+
+                <!-- Collar & Tie -->
+                <path d="M26 28 L32 30 L38 28" fill="#E8E8E8" stroke="#BDBDBD" stroke-width="0.5" />
+                <path d="M32 29 L34 33 L32 38 L30 33 Z" fill="#C62828" />
+
+                <!-- Head with texture -->
+                <ellipse cx="32" cy="18" rx="11" ry="13" fill="#7CB342" />
+                <ellipse cx="26" cy="22" rx="3" ry="2" fill="#689F38" opacity="0.6" />
+                <path d="M26 28 Q32 31 38 28" fill="#6FAF30" />
+
+                <!-- Front Arm with hand -->
+                <path d="M22 30 L14 34 L8 36" stroke="#5D4037" stroke-width="5" stroke-linecap="round" fill="none" />
+                <circle cx="8" cy="36" r="3.5" fill="#7CB342" />
+                <path d="M5 34 L3 32 M5 36 L2 36 M5 38 L3 40" stroke="#7CB342" stroke-width="2"
+                    stroke-linecap="round" />
+
+                <!-- Bloodshot Eyes -->
+                <circle cx="27" cy="15" r="4" fill="white" stroke="#33691E" stroke-width="0.5" />
+                <path d="M24 14 L27 15 M24 16 L26 15" stroke="#E57373" stroke-width="0.3" opacity="0.7" />
+                <circle cx="27" cy="15" r="1.5" fill="#1a1a1a" />
+                <circle cx="26" cy="14" r="0.5" fill="white" />
+
+                <circle cx="37" cy="16" r="5" fill="white" stroke="#33691E" stroke-width="0.5" />
+                <path d="M34 15 L37 16 M40 15 L37 16" stroke="#E57373" stroke-width="0.3" opacity="0.7" />
+                <circle cx="37" cy="16" r="2" fill="#1a1a1a" />
+                <circle cx="36" cy="15" r="0.7" fill="white" />
+
+                <!-- Nose & Mouth -->
+                <path d="M32 19 L29 22 L32 22" fill="#558B2F" />
+                <path d="M27 24 Q32 23 37 24 Q37 28 32 28 Q27 28 27 24" fill="#3E2723" />
+                <rect x="29" y="24" width="2" height="2" fill="#FFF9C4" rx="0.5" />
+                <rect x="33" y="24" width="2" height="2" fill="#FFF9C4" rx="0.5" />
+
+                <!-- Drool -->
+                <path d="M34 28 Q35 31 34 34" stroke="#9CCC65" stroke-width="1.5" fill="none" opacity="0.7"
+                    stroke-linecap="round">
+                    <animate attributeName="d" values="M34 28 Q35 31 34 34;M34 28 Q36 33 35 38;M34 28 Q35 31 34 34"
+                        dur="2s" repeatCount="indefinite" />
+                </path>
+
+                <!-- Enhanced Traffic Cone -->
+                <!-- Cone base with 3D effect -->
+                <g>
+                    <!-- Animated slight wobble from weight -->
+                    <animateTransform attributeName="transform" type="rotate" values="-1 32 10;1 32 10;-1 32 10"
+                        dur="1s" repeatCount="indefinite" />
+
+                    <!-- Main cone body -->
+                    <path d="M18 12 L32 -8 L46 12" fill="#FF9800" stroke="#E65100" stroke-width="1.5"
+                        stroke-linejoin="round" />
+                    <!-- Cone rim (3D ellipse) -->
+                    <ellipse cx="32" cy="12" rx="14" ry="4" fill="#F57C00" stroke="#E65100" stroke-width="1" />
+
+                    <!-- Reflective stripes -->
+                    <path d="M23 0 Q32 2 41 0" stroke="white" stroke-width="3" fill="none" opacity="0.85" />
+                    <path d="M21 6 Q32 8 43 6" stroke="white" stroke-width="2" fill="none" opacity="0.6" />
+
+                    <!-- Damage: Dents and scratches -->
+                    <path d="M26 -2 L28 -4 M27 -3 L29 -1" stroke="#BF360C" stroke-width="0.8" />
+                    <path d="M38 4 Q40 6 38 8" stroke="#BF360C" stroke-width="0.7" fill="none" />
+                    <ellipse cx="25" cy="8" rx="2" ry="1" fill="#E65100" opacity="0.5" />
+
+                    <!-- Paint drips running down -->
+                    <path d="M40 12 L41 18" stroke="#FF9800" stroke-width="2" stroke-linecap="round" opacity="0.8">
+                        <animate attributeName="opacity" values="0.8;0.4;0.8" dur="3s" repeatCount="indefinite" />
+                    </path>
+                    <path d="M24 12 L23 16" stroke="#FF9800" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
+
+                    <!-- Tip damage -->
+                    <circle cx="32" cy="-6" r="1.5" fill="#BF360C" opacity="0.7" />
+                </g>
+            </symbol>
+
+            <!-- Buckethead Zombie SVG (Premium Enhanced) -->
+            <symbol id="svg-buckethead" viewBox="0 0 64 64">
+                <!-- Shadow beneath zombie -->
+                <ellipse cx="32" cy="62" rx="12" ry="3" fill="rgba(0,0,0,0.3)" />
+
+                <!-- Back Leg with torn pants -->
+                <path d="M38 48 L38 60" stroke="#263238" stroke-width="5" stroke-linecap="round" />
+                <path d="M38 60 L42 62" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" />
+
+                <!-- Back Arm -->
+                <path d="M42 30 L52 28" stroke="#4E342E" stroke-width="4" stroke-linecap="round" />
+                <circle cx="53" cy="27" r="3" fill="#558B2F" />
+                <path d="M53 24 L55 22 M54 27 L57 26 M53 30 L55 32" stroke="#558B2F" stroke-width="1.5"
+                    stroke-linecap="round" />
+
+                <!-- Front Leg with torn pants -->
+                <path d="M26 48 L26 60" stroke="#37474F" stroke-width="5" stroke-linecap="round" />
+                <path d="M26 60 L22 62" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" />
+
+                <!-- Body/Coat with details -->
+                <path d="M20 28 L18 48 L46 48 L44 28 Z" fill="#5D4037" />
+                <path d="M22 32 Q24 35 22 38" stroke="#4E342E" stroke-width="1" fill="none" opacity="0.5" />
+                <path d="M32 28 L32 48" stroke="#3E2723" stroke-width="1.5" />
+                <path d="M18 48 L20 45 L24 48 L28 45 L32 48 L36 45 L40 48 L44 45 L46 48" fill="#5D4037" stroke="none" />
+
+                <!-- Collar & Tie -->
+                <path d="M26 28 L32 30 L38 28" fill="#E8E8E8" stroke="#BDBDBD" stroke-width="0.5" />
+                <path d="M32 29 L34 33 L32 38 L30 33 Z" fill="#C62828" />
+
+                <!-- Head with texture -->
+                <ellipse cx="32" cy="18" rx="11" ry="13" fill="#7CB342" />
+                <ellipse cx="26" cy="22" rx="3" ry="2" fill="#689F38" opacity="0.6" />
+                <path d="M26 28 Q32 31 38 28" fill="#6FAF30" />
+
+                <!-- Front Arm with hand -->
+                <path d="M22 30 L14 34 L8 36" stroke="#5D4037" stroke-width="5" stroke-linecap="round" fill="none" />
+                <circle cx="8" cy="36" r="3.5" fill="#7CB342" />
+                <path d="M5 34 L3 32 M5 36 L2 36 M5 38 L3 40" stroke="#7CB342" stroke-width="2"
+                    stroke-linecap="round" />
+
+                <!-- Bloodshot Eyes (visible through bucket) -->
+                <circle cx="27" cy="17" r="3" fill="white" stroke="#33691E" stroke-width="0.5" />
+                <path d="M25 16 L27 17" stroke="#E57373" stroke-width="0.3" opacity="0.7" />
+                <circle cx="27" cy="17" r="1" fill="#1a1a1a" />
+
+                <circle cx="37" cy="18" r="3.5" fill="white" stroke="#33691E" stroke-width="0.5" />
+                <path d="M35 17 L37 18" stroke="#E57373" stroke-width="0.3" opacity="0.7" />
+                <circle cx="37" cy="18" r="1.2" fill="#1a1a1a" />
+
+                <!-- Mouth visible under bucket -->
+                <path d="M28 24 Q32 23 36 24 Q36 27 32 27 Q28 27 28 24" fill="#3E2723" />
+                <rect x="30" y="24" width="1.5" height="1.5" fill="#FFF9C4" rx="0.3" />
+
+                <!-- Enhanced Bucket with worn metallic look -->
+                <g>
+                    <!-- Bucket main body with gradient effect -->
+                    <path d="M17 4 L47 4 L44 22 L20 22 Z" fill="#9E9E9E" stroke="#616161" stroke-width="1.5" />
+                    <!-- Bucket top rim (3D ellipse) -->
+                    <ellipse cx="32" cy="4" rx="15" ry="4" fill="#BDBDBD" stroke="#757575" stroke-width="1.5" />
+
+                    <!-- Metal sheen/highlight -->
+                    <path d="M22 8 Q32 6 42 8" fill="none" stroke="#E0E0E0" stroke-width="2" opacity="0.6" />
+                    <path d="M24 4 L26 4" stroke="white" stroke-width="1" opacity="0.4" />
+
+                    <!-- Multiple rust spots -->
+                    <ellipse cx="40" cy="10" rx="2.5" ry="1.5" fill="#8D6E63" opacity="0.8" />
+                    <ellipse cx="24" cy="16" rx="1.5" ry="1" fill="#795548" opacity="0.7" />
+                    <circle cx="38" cy="18" r="1" fill="#6D4C41" opacity="0.6" />
+
+                    <!-- Dents and damage -->
+                    <path d="M21 12 Q23 14 21 16" stroke="#757575" stroke-width="1.2" fill="none" />
+                    <path d="M42 8 L44 10 L42 12" stroke="#757575" stroke-width="1" fill="none" />
+                    <path d="M28 14 L30 12" stroke="#616161" stroke-width="0.8" />
+
+                    <!-- Red paint stripe (worn) -->
+                    <path d="M19 18 Q32 21 45 18" fill="none" stroke="#D32F2F" stroke-width="4" opacity="0.5"
+                        stroke-linecap="round" />
+                    <path d="M20 18 Q32 20 44 18" fill="none" stroke="#E57373" stroke-width="1" opacity="0.4" />
+
+                    <!-- Dripping water/slime from bucket -->
+                    <path d="M25 22 L24 28" stroke="#90A4AE" stroke-width="1.5" stroke-linecap="round" opacity="0.7">
+                        <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2.5s" repeatCount="indefinite" />
+                    </path>
+                    <path d="M39 22 L40 26" stroke="#90A4AE" stroke-width="1" stroke-linecap="round" opacity="0.5">
+                        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3s" repeatCount="indefinite" />
+                    </path>
+
+                    <!-- Handle with wear -->
+                    <path d="M15 4 C 12 4, 12 -2, 32 -2 C 52 -2, 52 4, 49 4" fill="none" stroke="#757575"
+                        stroke-width="2.5" />
+                    <path d="M20 -1 L24 -1" stroke="#9E9E9E" stroke-width="1" opacity="0.5" />
+                </g>
+            </symbol>
+
+            <!-- Flag Zombie SVG (Premium Enhanced) -->
+            <symbol id="svg-flagzombie" viewBox="0 0 64 64">
+                <!-- Shadow beneath zombie -->
+                <ellipse cx="32" cy="62" rx="12" ry="3" fill="rgba(0,0,0,0.3)" />
+
+                <!-- Back Leg (in running stride) -->
+                <path d="M40 48 L42 58" stroke="#263238" stroke-width="5" stroke-linecap="round" />
+                <path d="M42 58 L46 60" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" />
+
+                <!-- Flag Pole with wood grain -->
+                <path d="M50 4 L50 52" stroke="#6D4C41" stroke-width="4" stroke-linecap="round" />
+                <path d="M50 10 L50 12 M50 20 L50 22 M50 30 L50 32 M50 40 L50 42" stroke="#5D4037" stroke-width="1" />
+                <!-- Pole top cap -->
+                <circle cx="50" cy="4" r="2" fill="#4E342E" />
+
+                <!-- Animated Waving Flag with tattered edges -->
+                <g>
+                    <animateTransform attributeName="transform" type="translate" values="0 0;2 -1;0 0;-1 1;0 0"
+                        dur="0.8s" repeatCount="indefinite" />
+                    <!-- Flag body with wave effect -->
+                    <path d="M50 6 Q58 10 56 14 Q62 18 50 22" fill="#E53935" stroke="#B71C1C" stroke-width="1">
+                        <animate attributeName="d"
+                            values="M50 6 Q58 10 56 14 Q62 18 50 22;M50 6 Q60 12 58 16 Q64 20 50 22;M50 6 Q58 10 56 14 Q62 18 50 22"
+                            dur="0.8s" repeatCount="indefinite" />
+                    </path>
+                    <!-- Tattered flag edges -->
+                    <path d="M56 10 L58 9 L57 11" fill="#E53935" stroke="none" />
+                    <path d="M59 16 L62 15 L60 18" fill="#C62828" stroke="none" />
+                    <!-- Brain symbol on flag -->
+                    <ellipse cx="54" cy="14" rx="2.5" ry="2" fill="#FFCDD2">
+                        <animate attributeName="cx" values="54;55;54" dur="0.8s" repeatCount="indefinite" />
+                    </ellipse>
+                    <path d="M53 14 Q54 13 55 14 Q54 15 53 14" stroke="#E57373" stroke-width="0.5" fill="none" />
+                </g>
+
+                <!-- Front Leg (extended in run) -->
+                <path d="M24 48 L22 58" stroke="#37474F" stroke-width="5" stroke-linecap="round" />
+                <path d="M22 58 L18 60" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" />
+
+                <!-- Body/Coat with running lean -->
+                <path d="M18 28 L16 48 L46 48 L44 28 Z" fill="#6D4C41" />
+                <path d="M20 32 Q22 35 20 38" stroke="#5D4037" stroke-width="1" fill="none" opacity="0.5" />
+                <path d="M32 28 L32 48" stroke="#4E342E" stroke-width="1.5" />
+                <path d="M16 48 L18 45 L22 48 L28 45 L32 48 L38 45 L42 48 L46 48" fill="#6D4C41" stroke="none" />
+
+                <!-- Tie flowing behind -->
+                <path d="M32 29 L36 34 L32 42 L28 34 Z" fill="#E53935" />
+
+                <!-- Back Arm (Holding Flag pole) -->
+                <path d="M44 30 L50 28" stroke="#6D4C41" stroke-width="4" stroke-linecap="round" />
+                <circle cx="50" cy="28" r="3" fill="#7CB342" />
+                <path d="M50 25 L51 23 M50 31 L51 33" stroke="#7CB342" stroke-width="1.5" stroke-linecap="round" />
+
+                <!-- Head with texture -->
+                <ellipse cx="32" cy="18" rx="11" ry="13" fill="#7CB342" />
+                <ellipse cx="26" cy="22" rx="3" ry="2" fill="#689F38" opacity="0.6" />
+                <path d="M26 28 Q32 31 38 28" fill="#6FAF30" />
+
+                <!-- Front Arm pumping in run -->
+                <path d="M22 30 L12 36" stroke="#6D4C41" stroke-width="4" stroke-linecap="round" />
+                <circle cx="11" cy="36" r="3" fill="#7CB342" />
+                <path d="M9 34 L7 32 M8 37 L5 38" stroke="#7CB342" stroke-width="1.5" stroke-linecap="round" />
+
+                <!-- Bloodshot eyes (determined look) -->
+                <circle cx="27" cy="15" r="4" fill="white" stroke="#33691E" stroke-width="0.5" />
+                <path d="M24 14 L27 15" stroke="#E57373" stroke-width="0.3" opacity="0.7" />
+                <circle cx="28" cy="15" r="1.5" fill="#1a1a1a" /> <!-- Looking forward -->
+                <circle cx="27" cy="14" r="0.5" fill="white" />
+
+                <circle cx="37" cy="16" r="5" fill="white" stroke="#33691E" stroke-width="0.5" />
+                <path d="M35 15 L37 16" stroke="#E57373" stroke-width="0.3" opacity="0.7" />
+                <circle cx="38" cy="16" r="2" fill="#1a1a1a" /> <!-- Looking forward -->
+                <circle cx="37" cy="15" r="0.7" fill="white" />
+
+                <!-- Nose & Mouth -->
+                <path d="M32 19 L29 22 L32 22" fill="#558B2F" />
+                <path d="M27 24 Q32 23 37 24 Q37 27 32 27 Q27 27 27 24" fill="#3E2723" />
+                <rect x="29" y="24" width="2" height="1.5" fill="#FFF9C4" rx="0.3" />
+                <rect x="33" y="24" width="2" height="1.5" fill="#FFF9C4" rx="0.3" />
+
+                <!-- Messy hair from running -->
+                <path d="M25 7 L24 2 L27 6" fill="none" stroke="#212121" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M30 5 L31 1 L33 5" fill="none" stroke="#212121" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M36 6 L38 2 L37 7" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M39 8 L42 5" fill="none" stroke="#212121" stroke-width="1" stroke-linecap="round" />
+            </symbol>
+
+            <!-- Pole Vaulter Zombie SVG (Premium Enhanced) -->
+            <symbol id="svg-polevaulter" viewBox="0 0 64 64">
+                <!-- Shadow beneath zombie -->
+                <ellipse cx="32" cy="62" rx="14" ry="3" fill="rgba(0,0,0,0.3)" />
+
+                <!-- Back Leg (athletic stride) -->
+                <path d="M40 48 L42 58" stroke="#C62828" stroke-width="5" stroke-linecap="round" />
+                <!-- Athletic sneaker with detail -->
+                <path d="M42 58 L47 60" stroke="#F5F5F5" stroke-width="4" stroke-linecap="round" />
+                <path d="M43 59 L45 59" stroke="#E0E0E0" stroke-width="1" />
+                <path d="M46 60 L48 59" stroke="#2196F3" stroke-width="1" /> <!-- Logo accent -->
+
+                <!-- Enhanced Pole with tape wrapping -->
+                <g transform="rotate(-12 32 32)">
+                    <!-- Main pole body -->
+                    <rect x="2" y="28" width="62" height="5" rx="2.5" fill="#FFB300" stroke="#E65100"
+                        stroke-width="1" />
+                    <!-- Pole gradient shading -->
+                    <path d="M4 29 L62 29" stroke="#FFA000" stroke-width="1" opacity="0.7" />
+                    <path d="M4 32 L62 32" stroke="#E65100" stroke-width="0.5" opacity="0.4" />
+                    <!-- Grip tape wrapping -->
+                    <g fill="none" stroke="#212121" stroke-width="1.5" opacity="0.7">
+                        <path d="M14 28 L16 33" />
+                        <path d="M18 28 L20 33" />
+                        <path d="M22 28 L24 33" />
+                        <path d="M26 28 L28 33" />
+                    </g>
+                    <!-- Pole tip -->
+                    <circle cx="4" cy="30" r="3" fill="#424242" />
+                </g>
+
+                <!-- Front Leg (extended) -->
+                <path d="M24 48 L20 58" stroke="#C62828" stroke-width="5" stroke-linecap="round" />
+                <!-- Athletic sneaker -->
+                <path d="M20 58 L15 60" stroke="#F5F5F5" stroke-width="4" stroke-linecap="round" />
+                <path d="M17 59 L19 59" stroke="#E0E0E0" stroke-width="1" />
+                <path d="M16 60 L14 59" stroke="#2196F3" stroke-width="1" />
+
+                <!-- Athletic tracksuit body -->
+                <path d="M20 28 L18 48 L46 48 L44 28 Z" fill="#D32F2F" />
+                <!-- White stripes on sides -->
+                <path d="M20 28 L18 48" stroke="white" stroke-width="3" />
+                <path d="M44 28 L46 48" stroke="white" stroke-width="3" />
+                <!-- Collar stripe -->
+                <path d="M22 28 L42 28" stroke="white" stroke-width="2" />
+                <!-- Zipper line -->
+                <path d="M32 30 L32 48" stroke="#B71C1C" stroke-width="1" />
+                <!-- Zipper pull -->
+                <rect x="31" y="31" width="2" height="3" fill="#FFD54F" rx="0.5" />
+
+                <!-- Back Arm (Holding Pole) -->
+                <path d="M44 30 L50 26" stroke="#D32F2F" stroke-width="4" stroke-linecap="round" />
+                <circle cx="50" cy="26" r="3" fill="#7CB342" />
+                <path d="M50 23 L51 21 M51 26 L54 25" stroke="#7CB342" stroke-width="1.5" stroke-linecap="round" />
+
+                <!-- Head with texture -->
+                <ellipse cx="32" cy="18" rx="11" ry="13" fill="#7CB342" />
+                <ellipse cx="26" cy="22" rx="3" ry="2" fill="#689F38" opacity="0.5" />
+                <path d="M26 28 Q32 31 38 28" fill="#6FAF30" />
+
+                <!-- Enhanced Headband with sweat -->
+                <path d="M20 11 Q32 8 44 11" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" />
+                <path d="M20 11 Q32 8 44 11" fill="none" stroke="#EEEEEE" stroke-width="1" stroke-dasharray="3 2" />
+                <!-- Headband tails flowing back -->
+                <path d="M44 11 L48 8 L50 10" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" />
+                <!-- Sweat droplets -->
+                <ellipse cx="22" cy="14" rx="1" ry="1.5" fill="#81D4FA" opacity="0.8">
+                    <animate attributeName="cy" values="14;20;14" dur="1.5s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.5s" repeatCount="indefinite" />
+                </ellipse>
+                <circle cx="42" cy="16" r="1" fill="#81D4FA" opacity="0.6">
+                    <animate attributeName="cy" values="16;22;16" dur="2s" repeatCount="indefinite" />
+                </circle>
+
+                <!-- Front Arm (Holding Pole) -->
+                <path d="M22 32 L30 28" stroke="#D32F2F" stroke-width="4" stroke-linecap="round" />
+                <circle cx="30" cy="28" r="3" fill="#7CB342" />
+                <path d="M28 26 L27 24 M30 25 L31 23" stroke="#7CB342" stroke-width="1.5" stroke-linecap="round" />
+
+                <!-- Bloodshot Eyes (intense focus) -->
+                <circle cx="27" cy="15" r="4" fill="white" stroke="#33691E" stroke-width="0.5" />
+                <path d="M24 14 L27 15 M24 16 L26 15" stroke="#EF5350" stroke-width="0.4" opacity="0.6" />
+                <circle cx="28" cy="15" r="1.5" fill="#1a1a1a" />
+                <circle cx="27" cy="14" r="0.5" fill="white" />
+
+                <circle cx="37" cy="16" r="5" fill="white" stroke="#33691E" stroke-width="0.5" />
+                <path d="M35 15 L37 16 M40 15 L38 16" stroke="#EF5350" stroke-width="0.4" opacity="0.6" />
+                <circle cx="38" cy="16" r="2" fill="#1a1a1a" />
+                <circle cx="37" cy="15" r="0.7" fill="white" />
+
+                <!-- Nose & Mouth (athletic grimace) -->
+                <path d="M32 19 L29 22 L32 22" fill="#558B2F" />
+                <path d="M27 24 Q32 22 37 24 Q37 27 32 27 Q27 27 27 24" fill="#3E2723" />
+                <rect x="29" y="24" width="2" height="1.5" fill="#FFF9C4" rx="0.3" />
+                <rect x="33" y="24" width="2" height="1.5" fill="#FFF9C4" rx="0.3" />
+
+                <!-- Windswept hair -->
+                <path d="M24 5 L22 0 L26 4" fill="none" stroke="#212121" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M29 4 L28 -1 L32 3" fill="none" stroke="#212121" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M36 4 L40 0 L37 5" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M40 6 L44 2" fill="none" stroke="#212121" stroke-width="1" stroke-linecap="round" />
+            </symbol>
+
+            <!-- Newspaper Zombie SVG (Premium Enhanced) -->
+            <symbol id="svg-newspaper" viewBox="0 0 64 64">
+                <!-- Shadow beneath zombie -->
+                <ellipse cx="32" cy="62" rx="12" ry="3" fill="rgba(0,0,0,0.3)" />
+
+                <!-- Legs (shuffling walk) -->
+                <path d="M26 48 L26 60" stroke="#424242" stroke-width="5" stroke-linecap="round" />
+                <path d="M38 48 L38 60" stroke="#424242" stroke-width="5" stroke-linecap="round" />
+                <path d="M26 60 L22 62" stroke="#212121" stroke-width="4" stroke-linecap="round" />
+                <path d="M38 60 L42 62" stroke="#212121" stroke-width="4" stroke-linecap="round" />
+
+                <!-- Body/Bathrobe -->
+                <path d="M20 28 L18 48 L46 48 L44 28 Z" fill="#5D4037" />
+                <path d="M22 32 Q24 35 22 38" stroke="#4E342E" stroke-width="1" fill="none" opacity="0.5" />
+                <path d="M32 28 L32 48" stroke="#3E2723" stroke-width="1.5" />
+                <path d="M18 48 L20 45 L24 48 L28 45 L32 48 L36 45 L40 48 L44 45 L46 48" fill="#5D4037" stroke="none" />
+                <!-- Bathrobe belt -->
+                <path d="M22 36 L42 36" stroke="#3E2723" stroke-width="2" />
+                <path d="M32 36 L30 42" stroke="#3E2723" stroke-width="2" stroke-linecap="round" />
+                <path d="M32 36 L34 42" stroke="#3E2723" stroke-width="2" stroke-linecap="round" />
+
+                <!-- Head with texture -->
+                <ellipse cx="32" cy="18" rx="11" ry="13" fill="#7CB342" />
+                <ellipse cx="26" cy="22" rx="3" ry="2" fill="#689F38" opacity="0.5" />
+                <path d="M26 28 Q32 31 38 28" fill="#6FAF30" />
+
+                <!-- Balding hair (white/gray wisps) -->
+                <path d="M19 16 Q18 12 22 14" fill="none" stroke="#9E9E9E" stroke-width="1.5" />
+                <path d="M20 14 Q19 10 24 12" fill="none" stroke="#BDBDBD" stroke-width="1" />
+                <path d="M45 16 Q46 12 42 14" fill="none" stroke="#9E9E9E" stroke-width="1.5" />
+                <path d="M44 14 Q45 10 40 12" fill="none" stroke="#BDBDBD" stroke-width="1" />
+                <!-- Bald spot shine -->
+                <ellipse cx="32" cy="8" rx="4" ry="2" fill="white" opacity="0.2" />
+
+                <!-- Enhanced Glasses -->
+                <g opacity="0.95">
+                    <!-- Left lens with reflection -->
+                    <circle cx="27" cy="15" r="5" fill="#E3F2FD" stroke="#212121" stroke-width="1.5" />
+                    <ellipse cx="25" cy="13" rx="1.5" ry="1" fill="white" opacity="0.6" />
+                    <!-- Angry eye behind left lens -->
+                    <circle cx="27" cy="15" r="1.5" fill="#1a1a1a" />
+                    <path d="M24 13 L30 13" stroke="#212121" stroke-width="1" /> <!-- Angry brow -->
+
+                    <!-- Right lens with reflection -->
+                    <circle cx="37" cy="15" r="5" fill="#E3F2FD" stroke="#212121" stroke-width="1.5" />
+                    <ellipse cx="35" cy="13" rx="1.5" ry="1" fill="white" opacity="0.6" />
+                    <!-- Angry eye behind right lens -->
+                    <circle cx="37" cy="15" r="1.5" fill="#1a1a1a" />
+                    <path d="M34 13 L40 13" stroke="#212121" stroke-width="1" /> <!-- Angry brow -->
+
+                    <!-- Bridge -->
+                    <path d="M32 15 L32 15" stroke="#212121" stroke-width="2" />
+                    <!-- Temple arms -->
+                    <path d="M22 15 L18 14" stroke="#212121" stroke-width="1.5" />
+                    <path d="M42 15 L46 14" stroke="#212121" stroke-width="1.5" />
+                </g>
+
+                <!-- Grumbling mouth -->
+                <path d="M28 23 Q32 21 36 23 Q36 25 32 24 Q28 25 28 23" fill="#3E2723" />
+                <rect x="30" y="22" width="1" height="1.5" fill="#FFF9C4" rx="0.2" />
+                <rect x="33" y="22" width="1" height="1.5" fill="#FFF9C4" rx="0.2" />
+
+                <!-- Enhanced Animated Newspaper -->
+                <g transform="rotate(-3 32 35)">
+                    <!-- Newspaper shadow -->
+                    <rect x="10" y="26" width="44" height="28" fill="rgba(0,0,0,0.2)" rx="1"
+                        transform="translate(2 2)" />
+
+                    <!-- Main newspaper with subtle rustle animation -->
+                    <g>
+                        <animateTransform attributeName="transform" type="rotate" values="-1 32 40;1 32 40;-1 32 40"
+                            dur="2s" repeatCount="indefinite" />
+
+                        <!-- Paper base -->
+                        <rect x="10" y="24" width="44" height="30" fill="#F5F5F5" stroke="#BDBDBD" stroke-width="1"
+                            rx="1" />
+
+                        <!-- Fold line -->
+                        <path d="M32 24 L32 54" stroke="#E0E0E0" stroke-width="1" stroke-dasharray="3 2" />
+
+                        <!-- Front page layout -->
+                        <!-- Main headline -->
+                        <rect x="12" y="26" width="40" height="4" fill="#212121" rx="0.5" />
+
+                        <!-- Subheadline -->
+                        <rect x="12" y="32" width="30" height="2" fill="#616161" rx="0.3" />
+
+                        <!-- Photo area -->
+                        <rect x="12" y="36" width="18" height="14" fill="#90A4AE" rx="0.5" />
+                        <!-- Photo content hint -->
+                        <circle cx="21" cy="42" r="4" fill="#78909C" />
+
+                        <!-- Text columns -->
+                        <g fill="#78909C">
+                            <rect x="32" y="36" width="20" height="1.5" rx="0.3" />
+                            <rect x="32" y="39" width="20" height="1.5" rx="0.3" />
+                            <rect x="32" y="42" width="20" height="1.5" rx="0.3" />
+                            <rect x="32" y="45" width="18" height="1.5" rx="0.3" />
+                            <rect x="32" y="48" width="20" height="1.5" rx="0.3" />
+                        </g>
+
+                        <!-- Torn corner -->
+                        <path d="M52 48 L54 46 L52 44" fill="#F5F5F5" stroke="#BDBDBD" stroke-width="0.5" />
+                        <!-- Crinkle lines -->
+                        <path d="M14 30 Q18 31 16 34" stroke="#E0E0E0" stroke-width="0.5" fill="none" />
+                        <path d="M48 28 Q50 30 48 32" stroke="#E0E0E0" stroke-width="0.5" fill="none" />
+                    </g>
+                </g>
+
+                <!-- Hands gripping paper with fingers -->
+                <g>
+                    <!-- Left hand -->
+                    <circle cx="10" cy="34" r="3.5" fill="#7CB342" />
+                    <path d="M8 32 L6 30 M7 34 L4 34 M8 36 L6 38" stroke="#7CB342" stroke-width="2"
+                        stroke-linecap="round" />
+
+                    <!-- Right hand -->
+                    <circle cx="54" cy="34" r="3.5" fill="#7CB342" />
+                    <path d="M56 32 L58 30 M57 34 L60 34 M56 36 L58 38" stroke="#7CB342" stroke-width="2"
+                        stroke-linecap="round" />
+                </g>
+            </symbol>
+
+            <!-- Pea Projectile SVG -->
+            <symbol id="svg-pea" viewBox="0 0 16 16">
+                <circle cx="8" cy="8" r="7" fill="#4CAF50" />
+                <circle cx="6" cy="6" r="2" fill="#81C784" /> <!-- Highlight -->
+            </symbol>
+
+            <!-- Frozen Pea SVG -->
+            <symbol id="svg-frozenpea" viewBox="0 0 16 16">
+                <circle cx="8" cy="8" r="7" fill="#29B6F6" />
+                <circle cx="6" cy="6" r="2" fill="#B3E5FC" /> <!-- Highlight -->
+                <!-- Snowflakes -->
+                <path d="M4 8 L12 8 M8 4 L8 12" stroke="white" stroke-width="1" opacity="0.7" />
+            </symbol>
+
+            <!-- Sun SVG -->
+            <symbol id="svg-sun" viewBox="0 0 48 48">
+                <!-- Rays -->
+                <g stroke="#FFC107" stroke-width="3" stroke-linecap="round">
+                    <line x1="24" y1="4" x2="24" y2="8" />
+                    <line x1="24" y1="40" x2="24" y2="44" />
+                    <line x1="4" y1="24" x2="8" y2="24" />
+                    <line x1="40" y1="24" x2="44" y2="24" />
+                    <line x1="10" y1="10" x2="13" y2="13" />
+                    <line x1="35" y1="35" x2="38" y2="38" />
+                    <line x1="10" y1="38" x2="13" y2="35" />
+                    <line x1="35" y1="10" x2="38" y2="13" />
+                </g>
+                <!-- Core -->
+                <circle cx="24" cy="24" r="14" fill="#FFEB3B" stroke="#FBC02D" stroke-width="2" />
+                <circle cx="22" cy="22" r="4" fill="white" opacity="0.4" />
+            </symbol>
+
+            <!-- Lawnmower SVG -->
+            <symbol id="svg-lawnmower" viewBox="0 0 64 48">
+                <!-- Handle -->
+                <path d="M4 16 L20 28" stroke="#CFD8DC" stroke-width="4" stroke-linecap="round" />
+
+                <!-- Engine -->
+                <rect x="12" y="24" width="40" height="16" rx="4" fill="#D32F2F" />
+                <rect x="16" y="20" width="32" height="12" rx="2" fill="#EF5350" />
+
+                <!-- Wheels -->
+                <circle cx="16" cy="40" r="8" fill="#212121" />
+                <circle cx="16" cy="40" r="3" fill="#BDBDBD" />
+
+                <circle cx="48" cy="40" r="8" fill="#212121" />
+                <circle cx="48" cy="40" r="3" fill="#BDBDBD" />
+
+                <!-- Blade housing details -->
+                <path d="M20 28 L44 28" stroke="#B71C1C" stroke-width="2" />
+                <rect x="52" y="26" width="8" height="4" fill="#B71C1C" />
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- Main Menu Screen -->
+    <div id="main-menu" class="screen">
+        <div class="menu-bg"></div>
+        <div class="menu-container">
+            <div class="game-title">
+                <div class="title-plants">PLANTS</div>
+                <div class="title-vs">VS</div>
+                <div class="title-zombies">ZOMBIES</div>
+            </div>
+            <div class="menu-buttons">
+                <button id="start-btn" class="menu-btn primary">
+                    <span>Start Adventure</span>
+                </button>
+                <button id="options-btn" class="menu-btn">
+                    <span>Options</span>
+                </button>
+                <button id="help-btn" class="menu-btn">
+                    <span>How to Play</span>
+                </button>
+            </div>
+            <div class="menu-credit">
+                <div class="credit-disclaimer">A Fan-Made Project — Not affiliated with EA or PopCap</div>
+                <div class="credit-author">Created by Mobin Hosseini</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Options Screen -->
+    <div id="options-screen" class="screen hidden">
+        <div class="panel-container">
+            <h2>Options</h2>
+            <div class="option-row">
+                <label>Music Volume</label>
+                <input type="range" id="music-volume" min="0" max="100" value="50">
+                <span id="music-value">50%</span>
+            </div>
+            <div class="option-row">
+                <label>Sound Effects</label>
+                <input type="range" id="sfx-volume" min="0" max="100" value="70">
+                <span id="sfx-value">70%</span>
+            </div>
+            <button id="options-back-btn" class="menu-btn">Back</button>
+        </div>
+    </div>
+
+    <!-- Help Screen -->
+    <div id="help-screen" class="screen hidden">
+        <div class="panel-container help-panel">
+            <h2>How to Play</h2>
+            <div class="help-content">
+                <div class="help-item">
+                    <div class="help-icon">
+                        <svg width="40" height="40">
+                            <use href="#svg-sun" />
+                        </svg>
+                    </div>
+                    <div class="help-text">
+                        <h3>Collect Sun</h3>
+                        <p>Click on falling sun to collect it. Sun is your currency for planting.</p>
+                    </div>
+                </div>
+                <div class="help-item">
+                    <div class="help-icon">
+                        <svg width="40" height="40">
+                            <use href="#svg-peashooter" />
+                        </svg>
+                    </div>
+                    <div class="help-text">
+                        <h3>Plant Your Defense</h3>
+                        <p>Select a seed packet, then click on the lawn to plant.</p>
+                    </div>
+                </div>
+                <div class="help-item">
+                    <div class="help-icon">
+                        <svg width="40" height="40">
+                            <use href="#svg-zombie" />
+                        </svg>
+                    </div>
+                    <div class="help-text">
+                        <h3>Stop the Zombies</h3>
+                        <p>Don't let zombies reach your house on the left side!</p>
+                    </div>
+                </div>
+                <div class="help-item">
+                    <div class="help-icon">
+                        <svg width="50" height="40">
+                            <use href="#svg-lawnmower" />
+                        </svg>
+                    </div>
+                    <div class="help-text">
+                        <h3>Lawnmowers</h3>
+                        <p>Each row has a lawnmower - it destroys all zombies once, then it's gone!</p>
+                    </div>
+                </div>
+            </div>
+            <button id="help-back-btn" class="menu-btn">Back</button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen hidden">
+        <!-- Top Bar -->
+        <div id="top-bar">
+            <div id="sun-counter">
+                <svg width="32" height="32" class="sun-icon">
+                    <use href="#svg-sun" />
+                </svg>
+                <span id="sun-amount">150</span>
+            </div>
+            <div id="seed-tray">
+                <!-- Seed packets will be added dynamically -->
+            </div>
+            <div id="shovel-container">
+                <div id="shovel" class="tool">
+                    <svg viewBox="0 0 24 24" width="32" height="32">
+                        <path
+                            d="M15.1 1.81l-2.83 2.83c-.77.78-.77 2.05 0 2.83l1.41 1.41-8.49 8.49-2.83-2.83-1.41 1.41 8.49 8.49 1.41-1.41-2.83-2.83 8.49-8.49 1.41 1.41c.78.78 2.05.78 2.83 0l2.83-2.83-8.49-8.49z"
+                            fill="#8B4513" />
+                    </svg>
+                </div>
+            </div>
+            <button id="pause-btn" class="icon-btn">⏸</button>
+        </div>
+
+        <!-- Wave Indicator -->
+        <div id="wave-indicator">
+            <div id="wave-progress">
+                <div id="wave-fill"></div>
+            </div>
+            <span id="wave-text">Wave 1/10</span>
+        </div>
+
+        <!-- Game Area -->
+        <div id="game-area">
+            <!-- Background layers -->
+            <div id="sky"></div>
+            <div id="lawn">
+                <!-- Lawnmowers -->
+                <div id="lawnmowers">
+                    <div class="lawnmower" data-row="0"><svg width="60" height="45">
+                            <use href="#svg-lawnmower" />
+                        </svg></div>
+                    <div class="lawnmower" data-row="1"><svg width="60" height="45">
+                            <use href="#svg-lawnmower" />
+                        </svg></div>
+                    <div class="lawnmower" data-row="2"><svg width="60" height="45">
+                            <use href="#svg-lawnmower" />
+                        </svg></div>
+                    <div class="lawnmower" data-row="3"><svg width="60" height="45">
+                            <use href="#svg-lawnmower" />
+                        </svg></div>
+                    <div class="lawnmower" data-row="4"><svg width="60" height="45">
+                            <use href="#svg-lawnmower" />
+                        </svg></div>
+                </div>
+                <!-- Grid -->
+                <div id="grid-container"></div>
+            </div>
+        </div>
+
+        <!-- Announcements -->
+        <div id="announcement" class="hidden">
+            <div id="announcement-text"></div>
+        </div>
+
+        <!-- Game layers -->
+        <div id="sun-pool"></div>
+        <div id="projectiles"></div>
+        <div id="zombies"></div>
+    </div>
+
+    <!-- Pause Menu -->
+    <div id="pause-menu" class="overlay hidden">
+        <div class="panel-container">
+            <h2>Paused</h2>
+            <button id="resume-btn" class="menu-btn primary">Resume</button>
+            <button id="restart-btn" class="menu-btn">Restart</button>
+            <button id="quit-btn" class="menu-btn">Quit to Menu</button>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="game-over" class="overlay hidden">
+        <div class="panel-container game-over-panel">
+            <h2 id="gameover-title">Game Over</h2>
+            <p id="gameover-message">The zombies ate your brains!</p>
+            <button id="gameover-restart-btn" class="menu-btn primary">Try Again</button>
+            <button id="gameover-menu-btn" class="menu-btn">Main Menu</button>
+        </div>
+    </div>
+
+    <!-- Victory Screen -->
+    <div id="victory-screen" class="overlay hidden">
+        <div class="panel-container victory-panel">
+            <h2>Victory!</h2>
+            <p>You defended your lawn!</p>
+            <div id="victory-stats">
+                <div class="stat"><span class="stat-label">Zombies Killed:</span><span id="zombies-killed">0</span>
+                </div>
+                <div class="stat"><span class="stat-label">Sun Collected:</span><span id="sun-collected">0</span></div>
+            </div>
+            <button id="victory-next-btn" class="menu-btn primary">Next Level</button>
+            <button id="victory-menu-btn" class="menu-btn">Main Menu</button>
+        </div>
+    </div>
+
+    <!-- Plant Selection Screen -->
+    <div id="plant-select" class="overlay hidden">
+        <div class="panel-container plant-select-panel">
+            <h2>Choose Your Plants</h2>
+            <p class="subtitle">Select up to 6 plants for battle</p>
+            <div id="available-plants"></div>
+            <div id="selected-plants">
+                <h3>Selected Plants:</h3>
+                <div id="selected-slots"></div>
+            </div>
+            <button id="start-level-btn" class="menu-btn primary" disabled>Start Game!</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>

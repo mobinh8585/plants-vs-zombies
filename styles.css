@@ -1,0 +1,1359 @@
+/* ==========================================
+   PLANTS VS ZOMBIES - PREMIUM STYLESHEET
+   High-quality visual design with SVGs
+   ========================================== */
+
+/* CSS Variables */
+:root {
+    --grass-light: #5a9c38;
+    --grass-dark: #4a8530;
+    --grass-darker: #3d7026;
+    --sky-top: #87CEEB;
+    --sky-bottom: #c7e8f5;
+    --sun-yellow: #FFD700;
+    --sun-glow: rgba(255, 215, 0, 0.4);
+    --panel-bg: linear-gradient(180deg, #3a2820 0%, #2a1810 100%);
+    --panel-border: #5c3d2e;
+    --button-green: linear-gradient(180deg, #5cb85c 0%, #449d44 100%);
+    --button-green-hover: linear-gradient(180deg, #6fcf6f 0%, #5cb85c 100%);
+    --button-brown: linear-gradient(180deg, #8B6914 0%, #6B4E12 100%);
+    --overlay-bg: rgba(0, 0, 0, 0.85);
+    --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+    /* Grid dimensions */
+    --grid-cols: 9;
+    --grid-rows: 5;
+    --cell-width: 80px;
+    --cell-height: 100px;
+    --lawnmower-width: 70px;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    background: #1a1a1a;
+}
+
+/* ==========================================
+   SCREEN MANAGEMENT
+   ========================================== */
+.screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen.hidden {
+    display: none !important;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--overlay-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay.hidden {
+    display: none !important;
+}
+
+/* ==========================================
+   MAIN MENU
+   ========================================== */
+#main-menu {
+    background: url('assets/main-menu-bg.png') center center / cover no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.menu-container {
+    text-align: center;
+    z-index: 1;
+    padding: 2rem;
+}
+
+.game-title {
+    margin-bottom: 3rem;
+    user-select: none;
+}
+
+.title-plants {
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: #4CAF50;
+    text-shadow:
+        3px 3px 0 #2E7D32,
+        6px 6px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: 4px;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+.title-vs {
+    font-size: 2rem;
+    color: #8B4513;
+    margin: 0.5rem 0;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.title-zombies {
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: #8B4513;
+    text-shadow:
+        3px 3px 0 #5D4037,
+        6px 6px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: 4px;
+}
+
+@keyframes titleGlow {
+    from {
+        filter: brightness(1);
+    }
+
+    to {
+        filter: brightness(1.2);
+    }
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.menu-credit {
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+.credit-disclaimer {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.credit-author {
+    color: #FFD700;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(255, 215, 0, 0.3);
+    letter-spacing: 1px;
+}
+
+.menu-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    background: var(--button-brown);
+    border: 3px solid #8B6914;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    min-width: 240px;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.menu-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    filter: brightness(1.1);
+}
+
+.menu-btn:active {
+    transform: translateY(0);
+}
+
+.menu-btn.primary {
+    background: var(--button-green);
+    border-color: #388E3C;
+}
+
+.menu-btn:disabled {
+    background: #555;
+    border-color: #444;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ==========================================
+   PANELS (Options, Help, etc)
+   ========================================== */
+.panel-container {
+    background: var(--panel-bg);
+    border: 4px solid var(--panel-border);
+    border-radius: 20px;
+    padding: 2rem 3rem;
+    min-width: 400px;
+    max-width: 90vw;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.1);
+}
+
+.panel-container h2 {
+    color: #FFD700;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: var(--text-shadow);
+}
+
+.panel-container p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 0.95rem;
+}
+
+/* Options */
+.option-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.option-row label {
+    min-width: 140px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.option-row input[type="range"] {
+    flex: 1;
+    height: 8px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.option-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #4CAF50;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Help Panel */
+.help-panel {
+    max-width: 600px;
+}
+
+.help-content {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.help-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+}
+
+.help-icon {
+    width: 60px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.help-text h3 {
+    color: #FFD700;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.help-text p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ==========================================
+   GAME SCREEN
+   ========================================== */
+#game-screen {
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--sky-bottom);
+}
+
+/* Top Bar */
+#top-bar {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: url('assets/panel.png') center center / cover no-repeat;
+    border-bottom: 3px solid #2a1505;
+    gap: 12px;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+#sun-counter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: 6px 16px;
+    border-radius: 25px;
+    border: 2px solid #333;
+    min-width: 100px;
+}
+
+.sun-icon {
+    filter: drop-shadow(0 0 6px var(--sun-glow));
+}
+
+#sun-amount {
+    color: var(--sun-yellow);
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px var(--sun-glow);
+}
+
+#seed-tray {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+    background: linear-gradient(180deg, #3a2515 0%, #2a1505 100%);
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 2px solid #1a0a00;
+    overflow-x: auto;
+    min-width: 0;
+    /* Critical for nested flex scrolling */
+}
+
+.seed-packet {
+    width: 52px;
+    height: 68px;
+    background: linear-gradient(180deg, #5a4030 0%, #3a2515 100%);
+    border: 2px solid #2a1505;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px;
+    transition: all 0.15s ease;
+    position: relative;
+    flex-shrink: 0;
+    min-width: 52px;
+    /* Prevent shrinking below design width */
+}
+
+.seed-packet:hover:not(.disabled) {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.seed-packet.selected {
+    border-color: #FFD700;
+    box-shadow: 0 0 12px var(--sun-glow);
+    transform: translateY(-4px);
+}
+
+.seed-packet.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.seed-packet .seed-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 2px;
+}
+
+.seed-packet .seed-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.seed-packet .seed-cost {
+    font-size: 0.7rem;
+    color: var(--sun-yellow);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.seed-packet .cooldown-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 6px;
+    transition: height 0.1s linear;
+}
+
+#shovel-container {
+    padding: 4px;
+}
+
+#shovel {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(180deg, #6B4E12 0%, #4a3510 100%);
+    border: 2px solid #3a2505;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+#shovel:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+#shovel.selected {
+    border-color: #f44336;
+    box-shadow: 0 0 12px rgba(244, 67, 54, 0.5);
+}
+
+.icon-btn {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(180deg, #555 0%, #333 100%);
+    border: 2px solid #222;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.icon-btn:hover {
+    filter: brightness(1.2);
+    transform: scale(1.05);
+}
+
+/* Wave Indicator */
+#wave-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 16px;
+    background: rgba(0, 0, 0, 0.6);
+    flex-shrink: 0;
+}
+
+#wave-progress {
+    flex: 1;
+    height: 16px;
+    background: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #333;
+}
+
+#wave-fill {
+    height: 100%;
+    width: 10%;
+    background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 50%, #CDDC39 100%);
+    border-radius: 6px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
+
+#wave-text {
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    min-width: 80px;
+    text-align: right;
+}
+
+/* Game Area */
+#game-area {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+#sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    /* Removed sky gap */
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 100%);
+    display: none;
+    /* Hide it completely */
+}
+
+#lawn {
+    position: absolute;
+    top: 0;
+    /* Moved to top */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    background: url('assets/grass.png') center center / 100% 100% no-repeat;
+    opacity: 0.85;
+}
+
+#lawnmowers {
+    width: var(--lawnmower-width);
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(90deg, rgba(101, 67, 33, 0.6) 0%, transparent 100%);
+    flex-shrink: 0;
+}
+
+.lawnmower {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.lawnmower.used {
+    opacity: 0.2;
+}
+
+.lawnmower.activated {
+    animation: lawnmowerGo 1.5s linear forwards;
+}
+
+@keyframes lawnmowerGo {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(100vw - var(--lawnmower-width)));
+    }
+}
+
+#grid-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+}
+
+.grid-cell {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    position: relative;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(0, 0, 0, 0.05) 100%);
+}
+
+.grid-cell:nth-child(odd) {
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(0, 0, 0, 0.02) 100%);
+}
+
+.grid-cell:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.grid-cell.valid-placement {
+    background: rgba(76, 175, 80, 0.35);
+    box-shadow: inset 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.grid-cell.invalid-placement {
+    background: rgba(244, 67, 54, 0.35);
+    cursor: not-allowed;
+}
+
+/* Plants */
+.plant {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.plant svg {
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.3));
+}
+
+.plant.peashooter svg,
+.plant.snowpea svg,
+.plant.repeater svg {
+    animation: plantBob 1.2s ease-in-out infinite;
+}
+
+.plant.sunflower svg {
+    animation: sunflowerSway 1s ease-in-out infinite;
+}
+
+.plant.chomper svg {
+    animation: chomperBounce 0.8s ease-in-out infinite;
+}
+
+.plant.cherrybomb svg {
+    animation: cherryPulse 0.4s ease-in-out infinite;
+}
+
+.plant.potatomine.armed svg {
+    animation: mineShake 0.2s ease-in-out infinite;
+}
+
+@keyframes plantBob {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes sunflowerSway {
+
+    0%,
+    100% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+@keyframes chomperBounce {
+
+    0%,
+    100% {
+        transform: scaleY(1);
+    }
+
+    50% {
+        transform: scaleY(1.05);
+    }
+}
+
+@keyframes cherryPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+        filter: brightness(1.2);
+    }
+}
+
+@keyframes mineShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-2px);
+    }
+
+    75% {
+        transform: translateX(2px);
+    }
+}
+
+.plant-health-bar {
+    position: absolute;
+    bottom: 5px;
+    left: 15%;
+    width: 70%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.plant-health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    border-radius: 2px;
+    transition: width 0.15s ease;
+}
+
+/* Zombies */
+#zombies {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 50;
+}
+
+.zombie {
+    position: absolute;
+    width: 50px;
+    height: 64px;
+    z-index: 50;
+    pointer-events: auto;
+    transition: none;
+}
+
+.zombie svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.4));
+}
+
+.zombie.walking svg {
+    animation: zombieWalk 0.8s infinite ease-in-out;
+}
+
+.zombie.eating svg {
+    animation: zombieEat 0.3s ease-in-out infinite;
+}
+
+.zombie.frozen svg {
+    filter: brightness(0.8) hue-rotate(160deg) saturate(1.5) drop-shadow(0 0 8px rgba(0, 188, 212, 0.7));
+}
+
+.zombie.frozen.walking svg {
+    animation: zombieWalk 1.6s infinite ease-in-out;
+    /* Slowed when frozen */
+}
+
+.zombie.dying {
+    animation: zombieDie 0.8s ease forwards;
+    pointer-events: none;
+}
+
+.zombie.hurt svg {
+    animation: zombieHurt 0.15s ease;
+}
+
+/* Enhanced zombie walk - more organic shambling motion */
+@keyframes zombieWalk {
+    0% {
+        transform: rotate(-3deg) translateY(0) translateX(0) skewX(0deg);
+    }
+
+    15% {
+        transform: rotate(-1deg) translateY(-4px) translateX(1px) skewX(1deg);
+    }
+
+    30% {
+        transform: rotate(2deg) translateY(-2px) translateX(0) skewX(-1deg);
+    }
+
+    50% {
+        transform: rotate(3deg) translateY(0) translateX(-1px) skewX(0deg);
+    }
+
+    65% {
+        transform: rotate(1deg) translateY(-4px) translateX(0) skewX(-1deg);
+    }
+
+    80% {
+        transform: rotate(-2deg) translateY(-2px) translateX(1px) skewX(1deg);
+    }
+
+    100% {
+        transform: rotate(-3deg) translateY(0) translateX(0) skewX(0deg);
+    }
+}
+
+/* Enhanced zombie eat - aggressive lunging motion */
+@keyframes zombieEat {
+    0% {
+        transform: scale(1) translateX(0) rotate(0deg);
+    }
+
+    15% {
+        transform: scale(1.02) translateX(2px) rotate(2deg);
+    }
+
+    35% {
+        transform: scale(1.12) translateX(-6px) rotate(-5deg);
+        filter: brightness(1.1);
+    }
+
+    50% {
+        transform: scale(1.08) translateX(-3px) rotate(-2deg);
+    }
+
+    70% {
+        transform: scale(1.1) translateX(-5px) rotate(-4deg);
+        filter: brightness(1.1);
+    }
+
+    85% {
+        transform: scale(1.02) translateX(1px) rotate(1deg);
+    }
+
+    100% {
+        transform: scale(1) translateX(0) rotate(0deg);
+    }
+}
+
+/* Enhanced zombie death - dramatic collapse animation */
+@keyframes zombieDie {
+    0% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg) translateY(0);
+        filter: grayscale(0) brightness(1);
+    }
+
+    15% {
+        opacity: 1;
+        transform: scale(1.15) rotate(-5deg) translateY(-10px);
+        filter: grayscale(0) brightness(1.5);
+    }
+
+    30% {
+        opacity: 1;
+        transform: scale(1.1) rotate(5deg) translateY(-5px);
+        filter: grayscale(0.2) brightness(1.2);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(0.95) rotate(15deg) translateY(10px);
+        filter: grayscale(0.4) brightness(0.9);
+    }
+
+    70% {
+        opacity: 0.8;
+        transform: scale(0.85) rotate(45deg) translateY(30px);
+        filter: grayscale(0.6) brightness(0.8);
+    }
+
+    85% {
+        opacity: 0.4;
+        transform: scale(0.7) rotate(75deg) translateY(45px);
+        filter: grayscale(0.8) brightness(0.7);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(90deg) translateY(60px);
+        filter: grayscale(1) brightness(0.5);
+    }
+}
+
+/* Zombie hurt reaction animation */
+@keyframes zombieHurt {
+    0% {
+        transform: translateX(0);
+        filter: brightness(1);
+    }
+
+    25% {
+        transform: translateX(3px);
+        filter: brightness(2) saturate(0) hue-rotate(0deg);
+    }
+
+    50% {
+        transform: translateX(-3px);
+        filter: brightness(1.5) saturate(0.5);
+    }
+
+    75% {
+        transform: translateX(2px);
+        filter: brightness(1.2);
+    }
+
+    100% {
+        transform: translateX(0);
+        filter: brightness(1);
+    }
+}
+
+/* Low health zombie appearance */
+.zombie.low-health svg {
+    filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.4)) brightness(0.85);
+}
+
+.zombie.critical-health svg {
+    filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.4)) brightness(0.7) saturate(0.8);
+    animation: zombieCritical 0.5s ease-in-out infinite;
+}
+
+@keyframes zombieCritical {
+
+    0%,
+    100% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+.zombie-health-bar {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.zombie-health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #e53935, #ff7043);
+    border-radius: 2px;
+    transition: width 0.2s ease;
+    box-shadow: 0 0 4px rgba(255, 87, 34, 0.5);
+}
+
+/* Projectiles */
+#projectiles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 40;
+}
+
+.projectile {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    z-index: 40;
+}
+
+.projectile svg {
+    width: 100%;
+    height: 100%;
+}
+
+.projectile.pea svg {
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.projectile.frozen-pea svg {
+    filter: drop-shadow(0 0 4px rgba(0, 188, 212, 0.6));
+}
+
+/* Sun */
+#sun-pool {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 60;
+}
+
+.sun {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 60;
+    filter: drop-shadow(0 0 8px var(--sun-glow));
+    animation: sunFloat 2s ease-in-out infinite;
+}
+
+.sun svg {
+    width: 100%;
+    height: 100%;
+}
+
+.sun.falling {
+    animation: sunFall var(--fall-duration, 6s) linear forwards, sunFloat 2s ease-in-out infinite;
+}
+
+.sun.collecting {
+    animation: sunCollect 0.4s ease forwards;
+    pointer-events: none;
+}
+
+@keyframes sunFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-6px) rotate(10deg);
+    }
+}
+
+@keyframes sunFall {
+    from {
+        top: var(--start-y, -50px);
+    }
+
+    to {
+        top: var(--end-y, 70%);
+    }
+}
+
+@keyframes sunCollect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.3);
+        opacity: 0;
+        top: 10px !important;
+        left: 60px !important;
+    }
+}
+
+/* Announcements */
+#announcement {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+    text-align: center;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+#announcement.hidden {
+    opacity: 0;
+}
+
+#announcement-text {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #c62828;
+    text-shadow:
+        3px 3px 0 #000,
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        0 0 20px rgba(198, 40, 40, 0.6);
+    animation: announcePulse 0.5s ease-in-out infinite;
+    white-space: nowrap;
+}
+
+@keyframes announcePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+/* Explosion Effect */
+.explosion {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    animation: explode 0.4s ease-out forwards;
+    pointer-events: none;
+}
+
+.explosion::before {
+    content: '';
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #ff6600 0%, #ff0000 40%, transparent 70%);
+    border-radius: 50%;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* Game Over / Victory Panels */
+.game-over-panel h2 {
+    color: #c62828 !important;
+}
+
+.victory-panel h2 {
+    color: #FFD700 !important;
+    animation: victoryGlow 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes victoryGlow {
+    from {
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), var(--text-shadow);
+    }
+
+    to {
+        text-shadow: 0 0 25px rgba(255, 215, 0, 0.9), var(--text-shadow);
+    }
+}
+
+#victory-stats {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    padding: 0.5rem 0;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Plant Selection Panel */
+.plant-select-panel {
+    max-width: 700px;
+    width: 90vw;
+    background: url('assets/panel.png') center center / cover no-repeat;
+}
+
+#available-plants {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.plant-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.plant-card:hover {
+    border-color: #4CAF50;
+    transform: translateY(-3px);
+    background: rgba(76, 175, 80, 0.15);
+}
+
+.plant-card.selected {
+    border-color: #FFD700;
+    background: rgba(255, 215, 0, 0.15);
+    box-shadow: 0 0 10px var(--sun-glow);
+}
+
+.plant-card-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 6px;
+}
+
+.plant-card-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.plant-card-name {
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 2px;
+}
+
+.plant-card-cost {
+    color: var(--sun-yellow);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+#selected-plants {
+    margin-bottom: 1.5rem;
+}
+
+#selected-plants h3 {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+#selected-slots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.selected-slot {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.selected-slot.filled {
+    border-style: solid;
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.2);
+}
+
+.selected-slot svg {
+    width: 36px;
+    height: 36px;
+}
+
+/* Damage Flash */
+.damage-flash {
+    animation: damageFlash 0.15s ease;
+}
+
+@keyframes damageFlash {
+
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(2.5) saturate(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    :root {
+        --cell-width: 60px;
+        --cell-height: 80px;
+        --lawnmower-width: 55px;
+    }
+
+    .title-plants,
+    .title-zombies {
+        font-size: 3rem;
+    }
+
+    .seed-packet {
+        width: 44px;
+        min-width: 44px;
+        height: 58px;
+    }
+
+    .seed-packet .seed-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .plant svg {
+        width: 48px;
+        height: 48px;
+    }
+}
