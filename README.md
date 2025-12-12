@@ -11,7 +11,7 @@
 
 *No frameworks. No dependencies. Pure browser gaming.*
 
-[▶️ Play Now](#getting-started) • [📖 Features](#features) • [🌿 Plants](#-plants) • [🧟 Zombies](#-zombies)
+[🌿 Plants](#-plants) • [🧟 Zombies](#-zombies)
 
 </div>
 
@@ -87,14 +87,14 @@ The game features **8 unique plants**, each with special abilities:
 
 | Plant | Cost | Ability |
 |-------|------|---------|
-| ![Peashooter](https://via.placeholder.com/30/7CB342/7CB342?text=+) **Peashooter** | ☀️ 100 | Shoots peas at zombies in its lane |
-| ![Sunflower](https://via.placeholder.com/30/FFC107/FFC107?text=+) **Sunflower** | ☀️ 50 | Produces sun for planting more plants |
-| ![Wall-nut](https://via.placeholder.com/30/A1887F/A1887F?text=+) **Wall-nut** | ☀️ 50 | High-health defensive barrier |
-| ![Snow Pea](https://via.placeholder.com/30/29B6F6/29B6F6?text=+) **Snow Pea** | ☀️ 175 | Shoots frozen peas that slow zombies |
-| ![Cherry Bomb](https://via.placeholder.com/30/D32F2F/D32F2F?text=+) **Cherry Bomb** | ☀️ 150 | Explosive instant-kill in a 3×3 area |
-| ![Chomper](https://via.placeholder.com/30/9C27B0/9C27B0?text=+) **Chomper** | ☀️ 150 | Devours zombies whole (requires chewing time) |
-| ![Repeater](https://via.placeholder.com/30/7CB342/7CB342?text=+) **Repeater** | ☀️ 200 | Shoots two peas at once |
-| ![Potato Mine](https://via.placeholder.com/30/8D6E63/8D6E63?text=+) **Potato Mine** | ☀️ 25 | Cheap explosive that needs time to arm |
+| **Peashooter** | ☀️ 100 | Shoots peas at zombies in its lane |
+| **Sunflower** | ☀️ 50 | Produces sun for planting more plants |
+| **Wall-nut** | ☀️ 50 | High-health defensive barrier |
+| **Snow Pea** | ☀️ 175 | Shoots frozen peas that slow zombies |
+| **Cherry Bomb** | ☀️ 150 | Explosive instant-kill in a 3×3 area |
+| **Chomper** | ☀️ 150 | Devours zombies whole (requires chewing time) |
+| **Repeater** | ☀️ 200 | Shoots two peas at once |
+| **Potato Mine** | ☀️ 25 | Cheap explosive that needs time to arm |
 
 ### Plant Stats
 
