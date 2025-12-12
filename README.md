@@ -1,4 +1,4 @@
-# 🌻 Plants vs Zombies - Web Edition
+# 🌻 Plants vs Zombies - Web Edition. [PLAY NOW](https://mobinh8585.github.io/plants-vs-zombies)
 
 <div align="center">
 
